@@ -5,6 +5,8 @@ In this repo will demostrates the ability a machine to detect different objects 
 
 ## Reading the image that contains the selected object  
 
+As the first step. Read the image using the opencv module.
+
 ```python
   def read_image(path):
       return cv2.imread(path)
