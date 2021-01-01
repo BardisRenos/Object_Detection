@@ -10,10 +10,7 @@ def read_image(path):
     return cv2.imread(path)
 
 
-
-
-
-
-
-
-Object_detect
+def show_image_with_opencv(image):
+    cv2.imshow("Given Image", image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
