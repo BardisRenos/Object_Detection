@@ -11,3 +11,7 @@ As the first step. Read the image using the opencv module.
   def read_image(path):
       return cv2.imread(path)
 ```
+
+## Showing the image that I will use 
+
+
