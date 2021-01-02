@@ -9,7 +9,8 @@ class ImageCategories(object):
 
     def __init__(self):
         self.oculus_mask_threshold = None  # Oculus mask without pills black and white
-        self.image_gray_with_circle = None  # Oculus image with boundary and gray scale
+        self.image_gray_with_circle = None  # Oculus image with boundary and gray
+        self.image_gray_scale = None  # Oculus image in gray scale
         self.image_circle_combination = None  # Image with Oculus mask (black and white circle) and the pills
         self.image_threshold_bw = None  # Image with black background and white colored objects (if is needed)
         self.image_no_bg = None  # Image without background only the colored pills
@@ -24,24 +25,31 @@ class ImageCategories(object):
         self.image_morph = None  # Storing the morph image (Which is before the mask)
         self.image_to_show = None  # Storing the image that is only showing how is the image before preprocessing
 
+    def convert_to_gray_scale(self, image_to_gray):
+        self.image_gray_scale = cv2.cvtColor(image_to_gray, cv2.COLOR_BGR2GRAY)
 
-def image_preprocessing(self):
-    # self.creating_boundary_image(ImageDetails.image_path)
+    def image_preprocessing(self, image):
+        self.convert_to_gray_scale(image)
 
-    _, thresh = cv2.threshold(self.image_gray_with_circle, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    kernel = np.ones((3, 3), np.uint8)
-    self.image_morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel, iterations=9)
-    self.image_mask = 255 - self.image_morph
-    self.background = cv2.dilate(self.image_mask, kernel, iterations=5)
-    dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
-    _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
-    self.the_unknown_image = self.background - self.foreground
-    self.foreground = np.uint8(self.foreground)
+        _, thresh = cv2.threshold(self.image_gray_scale, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        kernel = np.ones((3, 3), np.uint8)
+        self.image_morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel, iterations=9)
+        self.image_mask = 255 - self.image_morph
+        self.background = cv2.dilate(self.image_mask, kernel, iterations=5)
+        dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
+        _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
+        self.the_unknown_image = self.background - self.foreground
+        self.foreground = np.uint8(self.foreground)
 
-    return dist_transform
+    def plot_the_image(self, give_image):
+        # show_image_with_opencv(give_image)
 
 
 if __name__ == '__main__':
+    A = ImageCategories()
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     image = read_image(image_path)
-    show_image_with_opencv(image_preprocessing(image=image))
+    A.image_preprocessing(image)
+    A.plot_the_image(A.foreground)
+
+    # show_image_with_opencv(image_preprocessing(image=image))
