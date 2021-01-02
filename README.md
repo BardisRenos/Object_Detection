@@ -22,3 +22,8 @@ Showing the image that I will use
 
 ```
 
+## Showing the stages of the images
+
+
+
+## Creating new borders  
