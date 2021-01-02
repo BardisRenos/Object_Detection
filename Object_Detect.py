@@ -49,6 +49,11 @@ class ImageCategories(object):
         h, w = self.image_copy.shape[:2]
         cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
+    def markers_creation(self):
+        _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
+        self.image_markers = self.image_markers + 10
+        self.image_markers[self.the_unknown_image == 255] = 0
+
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
 
