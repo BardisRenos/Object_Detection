@@ -25,17 +25,18 @@ class ImageCategories(object):
         self.image_to_show = None  # Storing the image that is only showing how is the image before preprocessing
 
 
-def image_preprocessing(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(image, 10, 255, cv2.THRESH_BINARY)
+def image_preprocessing(self):
+    # self.creating_boundary_image(ImageDetails.image_path)
+
+    _, thresh = cv2.threshold(self.image_gray_with_circle, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     kernel = np.ones((3, 3), np.uint8)
-    image_morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel, iterations=9)
-    image_mask = 255 - image_morph
-    background = cv2.dilate(image_mask, kernel, iterations=5)
-    dist_transform = cv2.distanceTransform(image_mask, cv2.DIST_L2, 3)
-    _, foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
-    the_unknown_image = background - foreground
-    foreground = np.uint8(foreground)
+    self.image_morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel, iterations=9)
+    self.image_mask = 255 - self.image_morph
+    self.background = cv2.dilate(self.image_mask, kernel, iterations=5)
+    dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
+    _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
+    self.the_unknown_image = self.background - self.foreground
+    self.foreground = np.uint8(self.foreground)
 
     return dist_transform
 
