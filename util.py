@@ -37,6 +37,19 @@ def show_images_stages(img1, img2, img3, img4, img5, img6, title1, title2, title
     plt.show()
 
 
+def show_images_stages_without_titles(img1, img2, img3, img4, img5, img6):
+    plt.figure(figsize=(20, 12))
+
+    plt.subplot(231), plt.imshow(img1, cmap='gray')
+    plt.subplot(232), plt.imshow(img2, cmap='gray')
+    plt.subplot(233), plt.imshow(img3, cmap='gray')
+
+    plt.subplot(234), plt.imshow(img4, cmap='gray')
+    plt.subplot(235), plt.imshow(img5, cmap='gray')
+    plt.subplot(236), plt.imshow(img6, cmap='gray')
+    plt.show()
+
+
 def show_image_with_opencv(image):
     cv2.imshow("Given Image", image)
     cv2.waitKey(0)
