@@ -42,6 +42,13 @@ class ImageCategories(object):
         self.the_unknown_image = self.background - self.foreground
         self.foreground = np.uint8(self.foreground)
 
+    def creating_boundary_image(self):
+        self.pure_image = read_image(image_path)
+        self.image_copy = self.pure_image.copy()
+        self.image_to_show = self.pure_image.copy()
+        h, w = self.image_copy.shape[:2]
+        cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
+
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
 
