@@ -30,6 +30,7 @@ class ImageCategories(object):
 
     def image_preprocessing(self, given_image):
         self.convert_to_gray_scale(given_image)
+        self.pure_image = given_image
 
         _, self.image_threshold_bw = cv2.threshold(self.image_gray_scale, 190, 255, cv2.THRESH_BINARY)
         kernel = np.ones((3, 3), np.uint8)
@@ -45,16 +46,18 @@ class ImageCategories(object):
         show_image_with_opencv(given_image)
 
     def plot_2_images(self):
-        show_2_images_with_matplot(self.image_morph, self.image_threshold_bw, "Morph Image", "Threshold")
+        show_2_images_with_matplot(self.pure_image, self.image_threshold_bw, "Morph Image", "Threshold")
 
-    def plot_multiple_images(self):
-        show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw, self.image_morph,
-                           self.image_mask, self.background, "Image", )
+    def plot_multiple_images_without_titles(self):
+        show_images_stages_without_titles(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
+                                          self.image_morph,
+                                          self.image_mask, self.background)
+
 
 if __name__ == '__main__':
     A = ImageCategories()
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     image = read_image(image_path)
     A.image_preprocessing(image)
-    A.plot_multiple_images()
-
+    # A.plot_2_images()
+    A.plot_multiple_images_without_titles()
