@@ -49,6 +49,18 @@ class ImageCategories(object):
         h, w = self.image_copy.shape[:2]
         cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
+    def markers_creation(self):
+        self.image_preprocessing()
+
+        _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
+        # An issue right now is that, the entire background pixels is given value equal to 0.
+        # This means watershed considers this region as unknown. So let us add 10 to all labels.
+        # So that sure background is not 0, but 10
+        self.image_markers = self.image_markers + 10
+        # Now, mark the region of unknown with zero
+        self.image_markers[self.the_unknown_image == 255] = 0
+        # show_2_images_with_matplot(sure_fg, markers, "The foreground", "The result")
+
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
 
