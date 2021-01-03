@@ -2,6 +2,7 @@ from util import *
 import cv2
 from skimage import measure, color, io
 
+
 # Creating a class object in order to keep the images to each category separately. By creating this class
 # we have the opportunity of keep track the images before and after the preprocessing.
 class ImageCategories(object):
@@ -55,7 +56,6 @@ class ImageCategories(object):
 
     def watershed(self):
         self.markers_creation()
-        # This is the final step which is the watershed algorithm
         self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
         self.pure_image[self.image_markers == -1] = [200, 255, 255]
         self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
@@ -77,5 +77,4 @@ if __name__ == '__main__':
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     image = read_image(image_path)
     A.image_preprocessing(image)
-    # A.plot_2_images()
     A.plot_multiple_images_without_titles()
