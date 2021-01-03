@@ -76,6 +76,8 @@ Here is the image and creating the white boundary to separte then pills with the
 
 ## After the applying the boundary to the image
 
+The images below show the preprocessed images after putting the boundary. 
+
 <p align="center"> 
 <img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2021-19-11.png" width="1000" height="650" style=centerme>
 </p>
