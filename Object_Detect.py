@@ -73,11 +73,8 @@ class ImageCategories(object):
 
 
 if __name__ == '__main__':
-    image_category = ImageCategories()
-    # The path of the image
+    A = ImageCategories()
     image_path = '/home/renos/Pictures/100100_d2_front.png'
-    # Reading the image from the path
     image = read_image(image_path)
-
-    image_category.image_preprocessing(image)
-    image_category.plot_multiple_images_without_titles()
+    A.image_preprocessing(image)
+    A.plot_multiple_images_without_titles()
