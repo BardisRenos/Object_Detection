@@ -42,6 +42,7 @@ class ImageCategories(object):
         kernel = np.ones((3, 3), np.uint8)
         self.image_morph = cv2.morphologyEx(self.image_threshold_bw, cv2.MORPH_CLOSE, kernel, iterations=9)
         self.image_mask = 255 - self.image_morph
+
         self.background = cv2.dilate(self.image_mask, kernel, iterations=5)
         dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
         _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
@@ -54,9 +55,8 @@ class ImageCategories(object):
         self.image_markers[self.the_unknown_image == 255] = 0
 
     def watershed(self):
-        self.markers_creation()
         self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
-        self.pure_image[self.image_markers == -1] = [200, 255, 255]
+        self.pure_image[self.image_markers == -1] = [0, 255, 0]
         self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
 
     def plot_an_image(self, given_image):
@@ -78,7 +78,7 @@ class ImageCategories(object):
 if __name__ == '__main__':
     image_category = ImageCategories()
     # The path of the image
-    image_path = '/home/renos/Pictures/100100_d2_front.png'
+    image_path = '/home/renos/Pictures/100119_d5_front.png'
     # Reading the image from the path
     image = read_image(image_path)
     # Applying image preprocessing
@@ -89,6 +89,7 @@ if __name__ == '__main__':
     image_category.creating_boundary_image(image)
     image_category.image_preprocessing(image_category.image_copy)
     image_category.markers_creation()
-    image_category.plot_2_images(image_category.image_copy, image_category.image_markers)
+    image_category.watershed()
+    image_category.plot_2_images(image_category.pure_image, image_category.image_label2rgb)
 
     # image_category.plot_images_stages()
