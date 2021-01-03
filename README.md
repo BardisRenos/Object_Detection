@@ -42,6 +42,8 @@ During the image preprocessing the image passed through different stages.
       self.foreground = np.uint8(self.foreground)
 ```
 
+This piece of code plots all 6 images in order to show the stages that an image pass.
+
 ```python
   def plot_images_stages(self):
       show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
