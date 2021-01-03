@@ -68,7 +68,7 @@ class ImageCategories(object):
 
     def plot_images_stages(self):
         show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
-                                          self.image_morph, self.image_mask, self.background,
+                           self.image_morph, self.image_mask, self.background,
                            "The input image", "Image to Gray", "Threshold Image", "Image Morph",
                            "Image with the Mask", "Background Image")
 
