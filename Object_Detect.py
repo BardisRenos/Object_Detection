@@ -29,6 +29,11 @@ class ImageCategories(object):
     def convert_to_gray_scale(self, image_to_gray):
         self.image_gray_scale = cv2.cvtColor(image_to_gray, cv2.COLOR_BGR2GRAY)
 
+    def creating_boundary_image(self, given_image):
+        self.image_copy = given_image.copy()
+        h, w = self.image_copy.shape[:2]
+        cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
+
     def image_preprocessing(self, given_image):
         self.convert_to_gray_scale(given_image)
         self.pure_image = given_image
@@ -42,11 +47,6 @@ class ImageCategories(object):
         _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
         self.the_unknown_image = self.background - self.foreground
         self.foreground = np.uint8(self.foreground)
-
-    def creating_boundary_image(self, given_image):
-        self.image_copy = given_image.copy()
-        h, w = self.image_copy.shape[:2]
-        cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
     def markers_creation(self):
         _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
@@ -71,6 +71,9 @@ class ImageCategories(object):
                            "The input image", "Image to Gray", "Threshold Image", "Image Morph",
                            "Image with the Mask", "Background Image")
 
+    # def plot_10_images_stages(self):
+    #     show_10_images_stages_without_titles()
+
 
 if __name__ == '__main__':
     image_category = ImageCategories()
@@ -84,4 +87,8 @@ if __name__ == '__main__':
     # image_category.plot_images_stages()
     # image_category.plot_an_image(image_category.image_copy)
     image_category.creating_boundary_image(image)
-    image_category.plot_2_images(image, image_category.image_copy)
+    image_category.image_preprocessing(image_category.image_copy)
+    image_category.markers_creation()
+    image_category.plot_2_images(image_category.image_copy, image_category.image_markers)
+
+    # image_category.plot_images_stages()
