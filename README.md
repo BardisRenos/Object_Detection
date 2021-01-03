@@ -68,6 +68,7 @@ From the previous chapter the image has a small thing to care of. Some pills are
       h, w = self.image_copy.shape[:2]
       cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 ```
+Here is the image and creating the white boundary to separte then pills with the rest of the image
 
 <p align="center"> 
 <img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2020-41-49.png" width="1000" height="650" style=centerme>
