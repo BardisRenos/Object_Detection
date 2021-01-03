@@ -45,3 +45,8 @@ During the image preprocessing the image passed through different stages.
 ## Creating new borders  
 
 From the previous chapter the image has a small thing to care of. Some pills are touching the border and as a result the pills are not well separeted and create a solid body with pills and the background. 
+
+
+```python
+
+```
