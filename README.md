@@ -54,7 +54,7 @@ This piece of code plots all 6 images in order to show the stages that an image 
 ```
 
 <p align="center"> 
-<img src="https://github.com/BardisRenos/Object_Detection/blob/main/Screenshot%20from%202021-01-03%2018-30-18.png" width="1200" height="650" style=centerme>
+<img src="https://github.com/BardisRenos/Object_Detection/blob/main/Screenshot%20from%202021-01-03%2018-30-18.png" width="900" height="650" style=centerme>
 </p>
 
 ## Creating new borders  
@@ -70,5 +70,5 @@ From the previous chapter the image has a small thing to care of. Some pills are
 ```
 
 <p align="center"> 
-<img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2020-41-49.png" width="700" height="650" style=centerme>
+<img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2020-41-49.png" width="1000" height="650" style=centerme>
 </p>
