@@ -1,6 +1,6 @@
 from util import *
 import cv2
-
+from skimage import measure, color, io
 
 # Creating a class object in order to keep the images to each category separately. By creating this class
 # we have the opportunity of keep track the images before and after the preprocessing.
@@ -8,13 +8,13 @@ class ImageCategories(object):
     pass
 
     def __init__(self):
-        self.oculus_mask_threshold = None  # Oculus mask without pills black and white
-        self.image_gray_with_circle = None  # Oculus image with boundary and gray
-        self.image_gray_scale = None  # Oculus image in gray scale
-        self.image_circle_combination = None  # Image with Oculus mask (black and white circle) and the pills
+        self.oculus_mask_threshold = None  # Creating the mask without pills black and white
+        self.image_gray_with_circle = None  # Image with boundary and gray
+        self.image_gray_scale = None  # Image in gray scale
+        self.image_circle_combination = None  # Image with the mask (black and white circle) and the pills
         self.image_threshold_bw = None  # Image with black background and white colored objects (if is needed)
         self.image_no_bg = None  # Image without background only the colored pills
-        self.pure_image = None  # Oculus image-colored (with pills) as it is from the camera.
+        self.pure_image = None  # Image-colored (with pills) as it is from the camera.
         self.image_copy = None  # Simple keeping an image copy for further processing
         self.foreground = None  # Keeping the foreground of the image after thresholding
         self.background = None  # Keeping the background of the image after dilation
@@ -43,7 +43,6 @@ class ImageCategories(object):
         self.foreground = np.uint8(self.foreground)
 
     def creating_boundary_image(self):
-        self.pure_image = read_image(image_path)
         self.image_copy = self.pure_image.copy()
         self.image_to_show = self.pure_image.copy()
         h, w = self.image_copy.shape[:2]
@@ -53,6 +52,13 @@ class ImageCategories(object):
         _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
         self.image_markers = self.image_markers + 10
         self.image_markers[self.the_unknown_image == 255] = 0
+
+    def watershed(self):
+        self.markers_creation()
+        # This is the final step which is the watershed algorithm
+        self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
+        self.pure_image[self.image_markers == -1] = [200, 255, 255]
+        self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
 
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
