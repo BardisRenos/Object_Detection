@@ -1,5 +1,6 @@
 from util import *
 import cv2
+from skimage import measure, color, io
 
 
 # Creating a class object in order to keep the images to each category separately. By creating this class
@@ -8,7 +9,7 @@ class ImageCategories(object):
     pass
 
     def __init__(self):
-        self.oculus_mask_threshold = None  # Mask without pills black and white
+        self.empty_mask_threshold = None  # Creating the mask without pills black and white
         self.image_gray_with_circle = None  # Image with boundary and gray
         self.image_gray_scale = None  # Image in gray scale
         self.image_circle_combination = None  # Image with the mask (black and white circle) and the pills
@@ -43,7 +44,6 @@ class ImageCategories(object):
         self.foreground = np.uint8(self.foreground)
 
     def creating_boundary_image(self):
-        self.pure_image = read_image(image_path)
         self.image_copy = self.pure_image.copy()
         self.image_to_show = self.pure_image.copy()
         h, w = self.image_copy.shape[:2]
@@ -53,6 +53,12 @@ class ImageCategories(object):
         _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
         self.image_markers = self.image_markers + 10
         self.image_markers[self.the_unknown_image == 255] = 0
+
+    def watershed(self):
+        self.markers_creation()
+        self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
+        self.pure_image[self.image_markers == -1] = [200, 255, 255]
+        self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
 
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
@@ -71,5 +77,4 @@ if __name__ == '__main__':
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     image = read_image(image_path)
     A.image_preprocessing(image)
-    # A.plot_2_images()
     A.plot_multiple_images_without_titles()
