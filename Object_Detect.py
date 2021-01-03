@@ -79,6 +79,7 @@ if __name__ == '__main__':
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     # Reading the image from the path
     image = read_image(image_path)
-
+    # Applying image preprocessing
     image_category.image_preprocessing(image)
+    # Plotting the images
     image_category.plot_images_stages()
