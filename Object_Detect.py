@@ -9,7 +9,7 @@ class ImageCategories(object):
     pass
 
     def __init__(self):
-        self.image_mask_threshold = None  # Creating the mask without pills black and white
+        self.empty_mask_threshold = None  # Creating the mask without pills black and white
         self.image_gray_with_circle = None  # Image with boundary and gray
         self.image_gray_scale = None  # Image in gray scale
         self.image_circle_combination = None  # Image with the mask (black and white circle) and the pills
