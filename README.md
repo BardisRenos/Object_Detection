@@ -73,3 +73,9 @@ Here is the image and creating the white boundary to separte then pills with the
 <p align="center"> 
 <img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2020-41-49.png" width="1000" height="650" style=centerme>
 </p>
+
+## After the applying the boundary to the image
+
+<p align="center"> 
+<img src="https://github.com/BardisRenos/Object_Detection/blob/Image_Preprocessing/Screenshot%20from%202021-01-03%2021-19-11.png" width="1000" height="650" style=centerme>
+</p>
