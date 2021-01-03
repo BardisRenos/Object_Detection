@@ -42,6 +42,11 @@ During the image preprocessing the image passed through different stages.
       self.foreground = np.uint8(self.foreground)
 ```
 
+
+<p align="center"> 
+<img src="https://github.com/BardisRenos/Object_Detection/blob/main/Screenshot%20from%202021-01-03%2018-30-18.png" width="900" height="650" style=centerme>
+</p>
+
 ## Creating new borders  
 
 From the previous chapter the image has a small thing to care of. Some pills are touching the border and as a result the pills are not well separeted and create a solid body with pills and the background. 
