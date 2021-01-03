@@ -9,7 +9,7 @@ class ImageCategories(object):
     pass
 
     def __init__(self):
-        self.empty_mask_threshold = None  # Creating the mask without pills black and white
+        self.image_mask_threshold = None  # Creating the mask without pills black and white
         self.image_gray_with_circle = None  # Image with boundary and gray
         self.image_gray_scale = None  # Image in gray scale
         self.image_circle_combination = None  # Image with the mask (black and white circle) and the pills
@@ -73,8 +73,11 @@ class ImageCategories(object):
 
 
 if __name__ == '__main__':
-    A = ImageCategories()
+    image_category = ImageCategories()
+    # The path of the image
     image_path = '/home/renos/Pictures/100100_d2_front.png'
+    # Reading the image from the path
     image = read_image(image_path)
-    A.image_preprocessing(image)
-    A.plot_multiple_images_without_titles()
+
+    image_category.image_preprocessing(image)
+    image_category.plot_multiple_images_without_titles()
