@@ -66,10 +66,11 @@ class ImageCategories(object):
     def plot_2_images(self):
         show_2_images_with_matplot(self.pure_image, self.image_threshold_bw, "Morph Image", "Threshold")
 
-    def plot_multiple_images_without_titles(self):
-        show_images_stages_without_titles(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
-                                          self.image_morph,
-                                          self.image_mask, self.background)
+    def plot_images_stages(self):
+        show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
+                                          self.image_morph, self.image_mask, self.background,
+                           "The input image", "Image to Gray", "Threshold Image", "Image Morph",
+                           "Image with the Mask", "Background Image")
 
 
 if __name__ == '__main__':
@@ -80,4 +81,4 @@ if __name__ == '__main__':
     image = read_image(image_path)
 
     image_category.image_preprocessing(image)
-    image_category.plot_multiple_images_without_titles()
+    image_category.plot_images_stages()
