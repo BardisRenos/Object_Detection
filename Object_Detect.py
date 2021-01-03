@@ -8,13 +8,13 @@ class ImageCategories(object):
     pass
 
     def __init__(self):
-        self.oculus_mask_threshold = None  # Oculus mask without pills black and white
-        self.image_gray_with_circle = None  # Oculus image with boundary and gray
-        self.image_gray_scale = None  # Oculus image in gray scale
-        self.image_circle_combination = None  # Image with Oculus mask (black and white circle) and the pills
+        self.oculus_mask_threshold = None  # Mask without pills black and white
+        self.image_gray_with_circle = None  # Image with boundary and gray
+        self.image_gray_scale = None  # Image in gray scale
+        self.image_circle_combination = None  # Image with the mask (black and white circle) and the pills
         self.image_threshold_bw = None  # Image with black background and white colored objects (if is needed)
         self.image_no_bg = None  # Image without background only the colored pills
-        self.pure_image = None  # Oculus image-colored (with pills) as it is from the camera.
+        self.pure_image = None  # Image-colored (with pills) as it is from the camera.
         self.image_copy = None  # Simple keeping an image copy for further processing
         self.foreground = None  # Keeping the foreground of the image after thresholding
         self.background = None  # Keeping the background of the image after dilation
