@@ -43,9 +43,8 @@ class ImageCategories(object):
         self.the_unknown_image = self.background - self.foreground
         self.foreground = np.uint8(self.foreground)
 
-    def creating_boundary_image(self):
-        self.image_copy = self.pure_image.copy()
-        self.image_to_show = self.pure_image.copy()
+    def creating_boundary_image(self, given_image):
+        self.image_copy = given_image.copy()
         h, w = self.image_copy.shape[:2]
         cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
@@ -63,8 +62,8 @@ class ImageCategories(object):
     def plot_an_image(self, given_image):
         show_image_with_opencv(given_image)
 
-    def plot_2_images(self):
-        show_2_images_with_matplot(self.pure_image, self.image_threshold_bw, "Morph Image", "Threshold")
+    def plot_2_images(self, image1, image2):
+        show_2_images_with_matplot(image1, image2, "Given image", "Image with boundary")
 
     def plot_images_stages(self):
         show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
@@ -80,6 +79,9 @@ if __name__ == '__main__':
     # Reading the image from the path
     image = read_image(image_path)
     # Applying image preprocessing
-    image_category.image_preprocessing(image)
+    # image_category.image_preprocessing(image)
     # Plotting the images
-    image_category.plot_images_stages()
+    # image_category.plot_images_stages()
+    # image_category.plot_an_image(image_category.image_copy)
+    image_category.creating_boundary_image(image)
+    image_category.plot_2_images(image, image_category.image_copy)
