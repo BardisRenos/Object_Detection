@@ -32,6 +32,7 @@ class ImageCategories(object):
 
     def creating_boundary_image(self, given_image):
         self.image_copy = given_image.copy()
+        self.image_to_show = given_image.copy()
         h, w = self.image_copy.shape[:2]
         cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
@@ -64,10 +65,10 @@ class ImageCategories(object):
         show_image_with_opencv(given_image)
 
     def plot_2_images(self, image1, image2):
-        show_2_images_with_matplot(image1, image2, "Given image", "Image with boundary")
+        show_2_images_with_matplot(image1, image2, "First Image", "Second Image")
 
     def plot_4_images(self):
-        show_4_images_with_matplot(self.image_mask, self.background, self.dist_transform, self.foreground)
+        show_4_images_with_matplot(self.the_unknown_image, self.image_markers, self.foreground, self.the_unknown_image)
 
     def plot_images_stages(self):
         show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
@@ -75,8 +76,8 @@ class ImageCategories(object):
                            "The input image", "Image to Gray", "Threshold Image", "Image Morph",
                            "Image with the Mask", "Background Image")
 
-    # def plot_10_images_stages(self):
-    #     show_10_images_stages_without_titles()
+    def plot_10_images_stages(self):
+        show_10_images_stages_without_titles(self.image_to_show, self.image_copy, self.)
 
 
 if __name__ == '__main__':
@@ -86,15 +87,10 @@ if __name__ == '__main__':
     # Reading the image from the path
     image = read_image(image_path)
     # Applying image preprocessing
-    # image_category.image_preprocessing(image)
-    # Plotting the images
-    # image_category.plot_images_stages()
-    # image_category.plot_an_image(image_category.image_copy)
     image_category.creating_boundary_image(image)
     image_category.image_preprocessing(image_category.image_copy)
-    image_category.plot_4_images()
-    # image_category.markers_creation()
-    # image_category.watershed()
-    # image_category.plot_2_images(image_category.background, image_category.foreground)
+    image_category.markers_creation()
+    image_category.watershed()
 
-    # image_category.plot_images_stages()
+    # Plotting the images through the stages of image preprocessing
+    image_category.plot_10_images_stages()
