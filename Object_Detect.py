@@ -77,7 +77,9 @@ class ImageCategories(object):
                            "Image with the Mask", "Background Image")
 
     def plot_10_images_stages(self):
-        show_10_images_stages_without_titles(self.image_to_show, self.image_copy, self.)
+        show_9_images_stages_without_titles(self.image_to_show, self.image_copy, self.image_threshold_bw,
+                                            self.image_mask, self.background, self.dist_transform,
+                                            self.foreground, self.the_unknown_image)
 
 
 if __name__ == '__main__':

@@ -59,7 +59,7 @@ def show_images_stages_without_titles(img1, img2, img3, img4, img5, img6):
     plt.show()
 
 
-def show_10_images_stages_without_titles(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10):
+def show_9_images_stages_without_titles(img1, img2, img3, img4, img5, img6, img7, img8, img9):
     plt.figure(figsize=(20, 12))
 
     plt.subplot(251), plt.imshow(img1, cmap='gray')
@@ -73,7 +73,6 @@ def show_10_images_stages_without_titles(img1, img2, img3, img4, img5, img6, img
     plt.subplot(257), plt.imshow(img7, cmap='gray')
     plt.subplot(258), plt.imshow(img8, cmap='gray')
     plt.subplot(259), plt.imshow(img9, cmap='gray')
-    plt.subplot(2510), plt.imshow(img10, cmap='gray')
 
     plt.show()
 
