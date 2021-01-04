@@ -25,6 +25,7 @@ class ImageCategories(object):
         self.image_mask = None  # Storing the mask image (Which is the invert of morph)
         self.image_morph = None  # Storing the morph image (Which is before the mask)
         self.image_to_show = None  # Storing the image that is only showing how is the image before preprocessing
+        self.dist_transform = None  # Storing the distance transform
 
     def convert_to_gray_scale(self, image_to_gray):
         self.image_gray_scale = cv2.cvtColor(image_to_gray, cv2.COLOR_BGR2GRAY)
@@ -38,14 +39,14 @@ class ImageCategories(object):
         self.convert_to_gray_scale(given_image)
         self.pure_image = given_image
 
-        _, self.image_threshold_bw = cv2.threshold(self.image_gray_scale, 190, 255, cv2.THRESH_BINARY)
+        _, self.image_threshold_bw = cv2.threshold(self.image_gray_scale, 240, 255, cv2.THRESH_BINARY)
         kernel = np.ones((3, 3), np.uint8)
         self.image_morph = cv2.morphologyEx(self.image_threshold_bw, cv2.MORPH_CLOSE, kernel, iterations=9)
         self.image_mask = 255 - self.image_morph
 
         self.background = cv2.dilate(self.image_mask, kernel, iterations=5)
-        dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
-        _, self.foreground = cv2.threshold(dist_transform, 0.237 * dist_transform.max(), 255, 0)
+        self.dist_transform = cv2.distanceTransform(self.image_mask, cv2.DIST_L2, 3)
+        _, self.foreground = cv2.threshold(self.dist_transform, 0.285 * self.dist_transform.max(), 255, 0)
         self.the_unknown_image = self.background - self.foreground
         self.foreground = np.uint8(self.foreground)
 
@@ -65,6 +66,9 @@ class ImageCategories(object):
     def plot_2_images(self, image1, image2):
         show_2_images_with_matplot(image1, image2, "Given image", "Image with boundary")
 
+    def plot_4_images(self):
+        show_4_images_with_matplot(self.image_mask, self.background, self.dist_transform, self.foreground)
+
     def plot_images_stages(self):
         show_images_stages(self.pure_image, self.image_gray_scale, self.image_threshold_bw,
                            self.image_morph, self.image_mask, self.background,
@@ -78,7 +82,7 @@ class ImageCategories(object):
 if __name__ == '__main__':
     image_category = ImageCategories()
     # The path of the image
-    image_path = '/home/renos/Pictures/100119_d5_front.png'
+    image_path = '/home/renos/Pictures/100100_d2_front.png'
     # Reading the image from the path
     image = read_image(image_path)
     # Applying image preprocessing
@@ -88,8 +92,9 @@ if __name__ == '__main__':
     # image_category.plot_an_image(image_category.image_copy)
     image_category.creating_boundary_image(image)
     image_category.image_preprocessing(image_category.image_copy)
+    image_category.plot_4_images()
     # image_category.markers_creation()
     # image_category.watershed()
-    image_category.plot_2_images(image_category.background, image_category.foreground)
+    # image_category.plot_2_images(image_category.background, image_category.foreground)
 
     # image_category.plot_images_stages()
