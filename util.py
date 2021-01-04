@@ -26,10 +26,10 @@ def show_2_images_with_matplot(image1, image2, title1, title2):
 
 def show_4_images_with_matplot(image1, image2, image3, image4):
     plt.figure(figsize=(20, 12))
-    plt.subplot(121), plt.imshow(image1, cmap='gray'), plt.title("Stage one")
-    plt.subplot(122), plt.imshow(image2, cmap='gray'), plt.title("Stage two")
-    plt.subplot(121), plt.imshow(image1, cmap='gray'), plt.title("Stage three")
-    plt.subplot(122), plt.imshow(image2, cmap='gray'), plt.title("Stage four")
+    plt.subplot(221), plt.imshow(image1, cmap='gray'), plt.title("Stage one")
+    plt.subplot(222), plt.imshow(image2, cmap='gray'), plt.title("Stage two")
+    plt.subplot(223), plt.imshow(image3, cmap='gray'), plt.title("Stage three")
+    plt.subplot(224), plt.imshow(image4, cmap='gray'), plt.title("Stage four")
     plt.show()
 
 
