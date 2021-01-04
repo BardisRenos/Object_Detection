@@ -62,17 +62,17 @@ def show_images_stages_without_titles(img1, img2, img3, img4, img5, img6):
 def show_9_images_stages_without_titles(img1, img2, img3, img4, img5, img6, img7, img8, img9):
     plt.figure(figsize=(20, 12))
 
-    plt.subplot(251), plt.imshow(img1, cmap='gray')
-    plt.subplot(252), plt.imshow(img2, cmap='gray')
-    plt.subplot(253), plt.imshow(img3, cmap='gray')
+    plt.subplot(331), plt.imshow(img1, cmap='gray')
+    plt.subplot(332), plt.imshow(img2, cmap='gray')
+    plt.subplot(333), plt.imshow(img3, cmap='gray')
 
-    plt.subplot(254), plt.imshow(img4, cmap='gray')
-    plt.subplot(255), plt.imshow(img5, cmap='gray')
-    plt.subplot(256), plt.imshow(img6, cmap='gray')
+    plt.subplot(334), plt.imshow(img4, cmap='gray')
+    plt.subplot(335), plt.imshow(img5, cmap='gray')
+    plt.subplot(336), plt.imshow(img6, cmap='gray')
 
-    plt.subplot(257), plt.imshow(img7, cmap='gray')
-    plt.subplot(258), plt.imshow(img8, cmap='gray')
-    plt.subplot(259), plt.imshow(img9, cmap='gray')
+    plt.subplot(337), plt.imshow(img7, cmap='gray')
+    plt.subplot(338), plt.imshow(img8, cmap='gray')
+    plt.subplot(339), plt.imshow(img9, cmap='gray')
 
     plt.show()
 
