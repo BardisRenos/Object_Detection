@@ -26,6 +26,7 @@ class ImageCategories(object):
         self.image_morph = None  # Storing the morph image (Which is before the mask)
         self.image_to_show = None  # Storing the image that is only showing how is the image before preprocessing
         self.dist_transform = None  # Storing the distance transform
+        self.image_with_circle_colored = None  # Storing the image with the circle in colored mode
 
     def convert_to_gray_scale(self, image_to_gray):
         self.image_gray_scale = cv2.cvtColor(image_to_gray, cv2.COLOR_BGR2GRAY)
@@ -33,8 +34,11 @@ class ImageCategories(object):
     def creating_boundary_image(self, given_image):
         self.image_copy = given_image.copy()
         self.image_to_show = given_image.copy()
+        self.image_with_circle_colored = given_image.copy()
+
         h, w = self.image_copy.shape[:2]
         cv2.circle(self.image_copy, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
+        cv2.circle(self.image_with_circle_colored, ((w // 2) + 1, (h // 2) - 5), 622, (255, 255, 255), 350)
 
     def image_preprocessing(self, given_image):
         self.convert_to_gray_scale(given_image)
@@ -76,10 +80,10 @@ class ImageCategories(object):
                            "The input image", "Image to Gray", "Threshold Image", "Image Morph",
                            "Image with the Mask", "Background Image")
 
-    def plot_10_images_stages(self):
-        show_9_images_stages_without_titles(self.image_to_show, self.image_copy, self.image_threshold_bw,
+    def plot_9_images_stages(self):
+        show_9_images_stages_without_titles(self.image_to_show, self.image_with_circle_colored, self.image_threshold_bw,
                                             self.image_mask, self.background, self.dist_transform,
-                                            self.foreground, self.the_unknown_image)
+                                            self.foreground, self.image_label2rgb, self.pure_image)
 
 
 if __name__ == '__main__':
@@ -95,4 +99,4 @@ if __name__ == '__main__':
     image_category.watershed()
 
     # Plotting the images through the stages of image preprocessing
-    image_category.plot_10_images_stages()
+    image_category.plot_9_images_stages()
