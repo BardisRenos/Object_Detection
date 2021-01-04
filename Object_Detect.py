@@ -88,8 +88,8 @@ if __name__ == '__main__':
     # image_category.plot_an_image(image_category.image_copy)
     image_category.creating_boundary_image(image)
     image_category.image_preprocessing(image_category.image_copy)
-    image_category.markers_creation()
-    image_category.watershed()
-    image_category.plot_2_images(image_category.pure_image, image_category.image_label2rgb)
+    # image_category.markers_creation()
+    # image_category.watershed()
+    image_category.plot_2_images(image_category.background, image_category.foreground)
 
     # image_category.plot_images_stages()
