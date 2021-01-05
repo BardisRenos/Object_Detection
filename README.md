@@ -105,14 +105,17 @@ def watershed(self):
 
 ## Showing the Image after passing a number of preprocessing steps
 
+The below image shows that, the image passed through.
+
 <p align="center"> 
 <img src="https://github.com/BardisRenos/Object_Detection/blob/main/Images/Screenshot%20from%202021-01-05%2000-00-22.png" width="1000" height="650" style=centerme>
 </p>
 
+
 ## Showing the last result of the image preprocessing
 
-
+As can been shown each pill (object) has a thin green line around. The distinction of each pill is clear by looking the the green line.
 
 <p align="center"> 
-<img src="" width="1000" height="650" style=centerme>
+<img src="https://github.com/BardisRenos/Object_Detection/blob/main/Images/Screenshot%20from%202021-01-05%2017-24-46.png" width="1000" height="650" style=centerme>
 </p>
