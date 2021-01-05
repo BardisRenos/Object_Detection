@@ -108,3 +108,11 @@ def watershed(self):
 <p align="center"> 
 <img src="https://github.com/BardisRenos/Object_Detection/blob/main/Images/Screenshot%20from%202021-01-05%2000-00-22.png" width="1000" height="650" style=centerme>
 </p>
+
+## Showing the last result of the image preprocessing
+
+
+
+<p align="center"> 
+<img src="" width="1000" height="650" style=centerme>
+</p>
