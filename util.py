@@ -81,3 +81,8 @@ def show_image_with_opencv(image):
     cv2.imshow("Given Image", image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+
+def show_image_with_matplot(image):
+    plt.imshow(image, cmap='gray'), plt.title("Given Image")
+    plt.show()
