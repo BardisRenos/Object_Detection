@@ -84,6 +84,24 @@ The images below show the preprocessed images after putting the boundary.
 <img src="https://github.com/BardisRenos/Object_Detection/blob/main/Images/Screenshot%20from%202021-01-03%2021-19-11.png" width="1000" height="650" style=centerme>
 </p>
 
+## Markers 
+
+```python
+def markers_creation(self):
+    _, self.image_markers = cv2.connectedComponents(self.foreground, connectivity=8)
+    self.image_markers = self.image_markers + 10
+    self.image_markers[self.the_unknown_image == 255] = 0
+```
+
+## Watershed
+
+```python
+def watershed(self):
+    self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
+    self.pure_image[self.image_markers == -1] = [0, 255, 0]
+    self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
+```
+
 
 ## Showing the Image after passing a number of preprocessing steps
 
