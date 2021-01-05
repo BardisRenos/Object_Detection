@@ -63,10 +63,14 @@ class ImageCategories(object):
     def watershed(self):
         self.image_markers = cv2.watershed(self.pure_image, self.image_markers)
         self.pure_image[self.image_markers == -1] = [0, 255, 0]
+        self.image_to_show[self.image_markers == -1] = [0, 255, 0]
         self.image_label2rgb = color.label2rgb(self.image_markers, bg_label=0)
 
-    def plot_an_image(self, given_image):
+    def plot_an_image_with_opencv(self, given_image):
         show_image_with_opencv(given_image)
+
+    def plot_an_image_with_matplotlib(self, given_image):
+        show_image_with_matplot(given_image)
 
     def plot_2_images(self, image1, image2):
         show_2_images_with_matplot(image1, image2, "First Image", "Second Image")
@@ -87,16 +91,22 @@ class ImageCategories(object):
 
 
 if __name__ == '__main__':
+    # Creating the ImageCategories object
     image_category = ImageCategories()
-    # The path of the image
+
+    # The path of the image that will be processed
     image_path = '/home/renos/Pictures/100100_d2_front.png'
     # Reading the image from the path
     image = read_image(image_path)
-    # Applying image preprocessing
+
+    # Applying image preprocessing steps
     image_category.creating_boundary_image(image)
     image_category.image_preprocessing(image_category.image_copy)
     image_category.markers_creation()
     image_category.watershed()
 
     # Plotting the images through the stages of image preprocessing
-    image_category.plot_9_images_stages()
+    # image_category.plot_9_images_stages()
+
+    # Plotting the last image that the pills are watersheds
+    image_category.plot_an_image_with_opencv(image_category.image_to_show)
