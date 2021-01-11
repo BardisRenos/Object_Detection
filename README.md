@@ -1,6 +1,6 @@
 # Object_Detection
 
-In this repo will demonstrates the ability a machine to detect different objects and in different position. This repo will shows the steps that need to follow in order to achieve that. 
+In this repo will demonstrate the ability a machine to detect different objects and in different position. This repo will shows the steps that need to follow in order to achieve that. 
 
 
 ## Reading the image and showing  
